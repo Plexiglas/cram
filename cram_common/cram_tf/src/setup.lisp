@@ -94,7 +94,7 @@ or in general at compile-time.")
       (roslisp:ros-info (cram-tf init-tf) "Environment name is ~a." environment-name))
 
     ;; initialize *TRANSFORMER*
-    (setf *transformer* (make-instance 'cl-tf:transform-listener))
+    (setf *transformer* (make-instance 'cl-tf2:buffer-client))
     (roslisp:ros-info (cram-tf init-tf)
                       "Initialized *transformer* to a ~a." (type-of *transformer*))
 

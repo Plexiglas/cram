@@ -76,5 +76,6 @@
      (:file "setup-urdf" :depends-on ("package"))
      (:file "setup" :depends-on ("package" "setup-urdf"))
      (:file "object-knowledge" :depends-on ("package"))
+     (:file "costmaps" :depends-on ("package"))
      (:file "hsrb-pick-up" :depends-on ("package" "object-knowledge"))
      (:file "demo" :depends-on ("package" "hsrb-pick-up"))))))

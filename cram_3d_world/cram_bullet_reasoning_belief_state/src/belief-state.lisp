@@ -42,13 +42,17 @@
     (when kitchen-urdf-string
       (setf rob-int:*environment-urdf* (cl-urdf:parse-urdf kitchen-urdf-string))))
 
+  
   ;; get the robot URDF from the ROS parameter server
   ;; TODO get rid of replace-all and instead fix the URDF of our real PR2
   (setf rob-int:*robot-urdf*
         (cl-urdf:parse-urdf
          (cut:replace-all
+         (cut:replace-all
           (roslisp:get-param rob-int:*robot-description-parameter*)
-          "\\" "  ")))
+          "\\" "  ")
+         "`" "  ")))
+  
 
   ;; set robot's URDF root link to *robot-base-frame*, not odom
   ;; because that's required for going actions

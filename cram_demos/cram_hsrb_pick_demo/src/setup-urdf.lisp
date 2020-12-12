@@ -37,8 +37,8 @@
       <geometry>
         <box size=\"0.001 0.001 0.001\"/>
       </geometry>
-   </collision>
-  </link>"
+   </collision
+"
   "The collision-box for base_footprint, since the URDF does not provide it.")
 
 (defparameter *tool-frame*

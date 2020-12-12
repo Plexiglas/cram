@@ -65,7 +65,10 @@
                              :timeout *tf-default-timeout*))))
                   (transform-stamped-error (error)
                     (roslisp:ros-warn (set-robot-state-from-tf)
-                                      "Failed with transform-stamped-error: ~a" error))))))))
+                                      "Failed with transform-stamped-error: ~a" error))))))
+             (print reference-frame)
+         (print root-link)
+         (print timestamp)))
 
 (defgeneric set-robot-state-from-joints (joint-states robot)
   (:method ((joint-states sensor_msgs-msg:jointstate) (robot robot-object))

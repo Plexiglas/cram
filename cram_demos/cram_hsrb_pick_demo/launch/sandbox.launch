@@ -3,10 +3,10 @@
   <arg name="upload" default="true" />
   <arg name="publish_joint_state" default="false" />
 
-  <!-- occupancy map -->
-  <include file="$(find iai_maps)/launch/map.launch" />
+  <!-- occupancy map 
+  <include file="$(find iai_maps)/launch/map.launch" />-->
 
-  <!-- kitchen URDF -->
+  <!-- kitchen URDF 
   <param name="kitchen_description"
          command="$(find xacro)/xacro.py '$(find iai_kitchen)/urdf_obj/iai_kitchen_python.urdf.xacro'"/>
   <node pkg="joint_state_publisher" type="joint_state_publisher"
@@ -26,10 +26,10 @@
     <remap from="robot_description" to="kitchen_description" />
     <remap from="joint_states" to="kitchen/joint_states" />
   </node>
-
+-->
   <!-- HSRB URDF -->
   <group if="$(arg upload)">
-    <param name="robot_description"
+    <param name="hsr_description"
            command="$(find xacro)/xacro.py
                     '$(find hsr_description)/robots/hsrb4s.urdf.xacro'"/>
   </group>
@@ -52,9 +52,9 @@
   </node>
   -->
 
-  <!-- TF buffer server -->
+  <!-- TF buffer server 
   <node pkg="tf2_ros" type="buffer_server" name="tf_server" output="screen" />
-
+-->
   <!-- IK solver -->
    <include file="$(find kdl_ik_service)/launch/kdl_ik.launch" />
 </launch>

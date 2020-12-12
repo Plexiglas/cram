@@ -42,7 +42,7 @@
         <box size=\"0.001 0.001 0.001\"/>
       </geometry>
    </collision>
-  </link>")
+")
 
 ;;the tool-frame for the hsrb, since the urdf does not provide one
 (defparameter *tool-frame*

@@ -28,8 +28,8 @@
 
 (in-package :cram-robot-interfaces)
 
-(defparameter *robot-description-parameter* "robot_description"
-  "ROS parameter that contains the robot description.")
+(defparameter *robot-description-parameter* "hsr_description"
+  "Ros parameter that contains the robot description.")
 
 (defvar *robot-urdf* nil
   "A cl-urdf object corresponding to parsed robot urdf.")

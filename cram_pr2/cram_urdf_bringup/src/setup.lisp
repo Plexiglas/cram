@@ -33,26 +33,16 @@
 (defparameter *robot-parameter* "robot_description")
 (defparameter *kitchen-parameter* "kitchen_description")
 
-(defun setup-bullet-world ()
+(defun setup-hsr-bullet-world()
   (setf btr:*current-bullet-world* (make-instance 'btr:bt-reasoning-world))
-
-  (let* ((robot-urdf (substitute #\SPACE #\` (roslisp:get-param *robot-parameter*)))
-         (robot (or rob-int:*robot-urdf*
-                    (setf rob-int:*robot-urdf*
-                          (cl-urdf:parse-urdf robot-urdf))))
-        (kitchen (or *kitchen-urdf*
+  (let* ((robot (get-urdf-hsrb))
+         (kitchen (or *kitchen-urdf*
                      (let ((kitchen-urdf-string
                              (roslisp:get-param *kitchen-parameter* nil)))
                        (when kitchen-urdf-string
                          (setf *kitchen-urdf* (cl-urdf:parse-urdf
                                                kitchen-urdf-string)))))))
-
-    (if (search "hsrb" robot-urdf)
-        (setf robot (get-urdf-hsrb))
-        (when (search "boxy" robot-urdf )
-          (get-setup-boxy)))
-        
-    (assert
+   (assert
      (cut:force-ll
       (prolog `(and
                 (btr:bullet-world ?w)
@@ -67,13 +57,7 @@
                                                  :compound T))
                 (-> (cram-robot-interfaces:robot ?robot)
                     (btr:assert ?w (btr:object :urdf ?robot ((0 0 0) (0 0 0 1)) :urdf ,robot))
-                    (warn "ROBOT was not defined. Have you loaded a robot package?")))))))
-
-
- (let ((robot-object (btr:get-robot-object)))
-    (if robot-object
-        (btr:set-robot-state-from-tf cram-tf:*transformer* robot-object)
-        (warn "ROBOT was not defined. Have you loaded a robot package?"))))
+                    (warn "ROBOT was not defined. Have you loaded a robot package?"))))))))
 
 (defun init-projection ()
     (def-fact-group costmap-metadata (costmap:costmap-size
@@ -91,7 +75,7 @@
 
   (setf cram-tf:*transformer* (make-instance 'cl-tf2:buffer-client))
 
-  (setup-bullet-world)
+  (setup-hsr-bullet-world)
 
   (setf cram-tf:*tf-default-timeout* 2.0)
 
